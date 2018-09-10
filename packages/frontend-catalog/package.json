@@ -1,0 +1,26 @@
+{
+  "name": "frontend-catalog",
+  "version": "1.0.0",
+  "description": "App to view catalog of games",
+  "keywords": [],
+  "author": "Guilherme M Gregio <guilherme@gregio.net> (http://gregio.net)",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "docker": "npm run docker:package && npm run docker:build",
+    "docker:build": "docker build -t $npm_package_name .",
+    "docker:package": "npm pack"
+  },
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "jss": "latest",
+    "next": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-jss": "latest"
+  }
+}

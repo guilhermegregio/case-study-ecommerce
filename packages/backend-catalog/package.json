@@ -1,0 +1,21 @@
+{
+  "name": "backend-catalog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Guilherme M Gregio <guilherme@gregio.net> (http://gregio.net)",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "seneca": "latest",
+    "seneca-balance-client": "latest",
+    "seneca-mesh": "latest"
+  },
+  "devDependencies": {
+    "kcd-scripts": "^0.44.0"
+  }
+}

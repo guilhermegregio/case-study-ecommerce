@@ -1,0 +1,12 @@
+{
+  "name": "case-study-tech-lead",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Guilherme M Gregio <guilherme@gregio.net> (http://gregio.net)",
+  "license": "MIT",
+  "devDependencies": {
+    "kcd-scripts": "^0.44.0"
+  }
+}
