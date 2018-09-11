@@ -16,6 +16,7 @@
     "lodash.omit": "^4.5.0",
     "lodash.pick": "^4.4.0",
     "lodash.unionby": "^4.8.0",
+    "nsqjs": "^0.11.0",
     "seneca": "latest",
     "seneca-balance-client": "latest",
     "seneca-mesh": "latest"
