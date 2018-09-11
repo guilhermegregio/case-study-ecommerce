@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const Seneca = require('seneca')
 const app = express()
 
+const PORT = process.env.PORT || 3001
 const HOST = process.env.HOST || '127.0.0.1'
 const BASES = process.env.BASES || '127.0.0.1:39999'
 
@@ -11,7 +12,7 @@ const seneca = Seneca({tag: 'api', log: 'silent'})
   // .test('print')
   .use('mesh', {
     host: HOST,
-    bases: [BASES]
+    bases: [BASES],
   })
 
 const act = Promise.promisify(seneca.act, {context: seneca})
@@ -81,6 +82,6 @@ app.get('/wft/:color', function(req, res) {
     })
 })
 
-app.listen(3000, function() {
-  console.log(`listening on http://localhost:3000`)
+app.listen(PORT, function() {
+  console.log(`listening on http://localhost:${PORT}`)
 })
