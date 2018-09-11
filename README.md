@@ -4,12 +4,34 @@
 
 ## Desenvolvimento
 
+### Install
+
+Instalar as dependencias
+
+```
+npm run install
+```
+
 ### Rodar local
 
 Para iniciar localmente todos os processos utilize o script abaixo
 
 ```
 node index.js
+```
+
+### Gerar imagens
+
+Para rodar o build e gerar todas a imagens docker use:
+
+```
+npm run build
+```
+
+### Rodar todo o ecossistema no docker com docker-compose
+
+```
+docker-compose up
 ```
 
 ### Adicionar mensagens na fila
@@ -42,9 +64,11 @@ curl -d '{"steam": true, "psn": false, "xbox": false}' http://localhost:4151/pub
 - [x] Quebrar metodos getCatalog em mais partes: verifyIndices, createIndeces, getGsmes, updateIndices, etc
 - [x] Adicionar integração com NSQ para alterar lojas habilitadas e refazer indices
 - [ ] Adicionar testes
-- [ ] Adicionar documentação, com screenshot, commit messages, etc
+- [x] Adicionar documentação, com screenshot, commit messages, etc
 - [ ] Configurar docker-compose para subir a aplicação inteira
-- [ ] Adicionar o lerna para facilitar builds de todos os projetos
+- [x] Adicionar o lerna para facilitar builds de todos os projetos
+- [ ] Criar features para detalhes dos games
+- [ ] Criar feature para favoritos
 
 [arquitetura pdf]: ./resources/arquitetura.pdf
 [screenshot mobile]: ./resources/screenshot-mobile.png
