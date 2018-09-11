@@ -1,0 +1,47 @@
+version: "3"
+services:
+  nsqlookupd:
+    image: nsqio/nsq 
+    command: /nsqlookupd
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+
+
+  nsqd:
+    depends_on:
+      - nsqlookupd  
+    depends_on:
+      - nsqlookupd 
+    image: nsqio/nsq 
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
+
+
+  nsqadmin:
+    depends_on:
+      - nsqlookupd  
+    image: nsqio/nsq 
+    ports:
+      - "4171:4171"
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+
+networks:
+  services:
