@@ -4,45 +4,78 @@ const omit = require('lodash.omit')
 const pick = require('lodash.pick')
 const find = require('lodash.find')
 
-const getCatalog = ({act}) =>
-  function(msg, done) {
-    const actions = [
-      {
-        role: 'catalog-steam',
-        cmd: 'list',
-      },
-      {
-        role: 'catalog-xbox',
-        cmd: 'list',
-      },
-      {
-        role: 'catalog-psn',
-        cmd: 'list',
-      },
-    ]
+const getCatalog = ({act, esClient}) =>
+  async function(msg, done) {
+    const enablesStores = ['steam', 'xbox', 'psn']
 
-    const commands = actions.map(action => act(action))
+    const filterStores = enablesStores.map(store => ({
+      term: {'brands.stores': store},
+    }))
 
-    Promise.all(commands)
-      .then(([steam, xbox, psn]) => {
-        const games = [...steam, ...xbox, ...psn]
+    const actions = enablesStores.map(store => ({
+      role: `catalog-${store}`,
+      cmd: 'list',
+    }))
 
-        const uniqGames = unionBy(games, 'title').map(game => {
-          const brands = {}
-          const findInSteam = find(steam, ['title', game.title])
-          const findInXbox = find(xbox, ['title', game.title])
-          const findInPsn = find(psn, ['title', game.title])
+    const result = await esClient.cat.indices()
 
-          brands['steam'] = findInSteam && pick(findInSteam, ['sku', 'price'])
-          brands['xbox'] = findInXbox && pick(findInXbox, ['sku', 'price'])
-          brands['psn'] = findInPsn && pick(findInPsn, ['sku', 'price'])
+    if (!result) {
+      const pickFields = ['sku', 'price']
+      const commands = actions.map(action => act(action))
 
-          return Object.assign({}, omit(game, ['sku', 'price']), {brands})
-        })
+      const [steam, xbox, psn] = await Promise.all(commands)
 
-        done(null, Object.values(uniqGames))
+      const games = [...steam, ...xbox, ...psn]
+
+      const uniqGames = unionBy(games, 'title').map(game => {
+        const brands = {stores: []}
+        const findInSteam = find(steam, ['title', game.title])
+        const findInXbox = find(xbox, ['title', game.title])
+        const findInPsn = find(psn, ['title', game.title])
+
+        if (findInSteam) {
+          brands.stores.push('steam')
+          brands['steam'] = pick(findInSteam, pickFields)
+        }
+
+        if (findInXbox) {
+          brands.stores.push('xbox')
+          brands['xbox'] = pick(findInXbox, pickFields)
+        }
+
+        if (findInPsn) {
+          brands.stores.push('psn')
+          brands['psn'] = pick(findInPsn, pickFields)
+        }
+
+        return Object.assign({}, omit(game, pickFields), {brands})
       })
-      .catch(err => console.log(err))
+
+      done(null, Object.values(uniqGames))
+
+      uniqGames.forEach(game => {
+        esClient.create({
+          index: 'catalog',
+          type: 'catalog',
+          id: game.title,
+          body: game,
+        })
+      })
+    } else {
+      const result = await esClient.search({
+        index: 'catalog',
+        body: {
+          query: {
+            bool: {
+              should: filterStores,
+            },
+          },
+        },
+      })
+
+      const games = result.hits.hits.map(r => r._source)
+      done(null, Object.values(games))
+    }
   }
 
 module.exports = getCatalog
