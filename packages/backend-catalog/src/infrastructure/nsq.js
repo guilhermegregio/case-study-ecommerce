@@ -1,12 +1,14 @@
 const nsq = require('nsqjs')
 
+const LOOKUPD = process.env.LOOKUPD || '127.0.0.1:4161'
+
 function subscribe(options) {
   const defaultOptions = Object.assign(
     {
       onMessage: function() {},
       topic: 'sample_topic',
       channel: 'test_channel',
-      lookupd: '127.0.0.1:4161',
+      lookupd: LOOKUPD,
     },
     options,
   )

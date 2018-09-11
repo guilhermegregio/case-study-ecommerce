@@ -27,7 +27,7 @@ app.get('/catalog', function(req, res) {
   seneca.act(
     {
       role: 'catalog',
-      cmd: 'list',
+      cmd: 'getGamesAndCreateIndices',
     },
     function(err, out) {
       if (err) {
