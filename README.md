@@ -20,6 +20,12 @@ Para iniciar localmente todos os processos utilize o script abaixo
 node index.js
 ```
 
+Para iniciar o frontend localmente
+
+```
+npm run start:frontend
+```
+
 ### Gerar imagens
 
 Para rodar o build e gerar todas a imagens docker use:

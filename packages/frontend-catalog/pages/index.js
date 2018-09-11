@@ -16,7 +16,8 @@ import {withStyles} from '@material-ui/core/styles'
 import CurrencyFormat from 'react-currency-format'
 import axios from 'axios'
 
-const API_URL = process.env.API_URL || 'http://localhost:3001'
+const API_URL =
+  process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001'
 
 const styles = theme => ({
   appBar: {

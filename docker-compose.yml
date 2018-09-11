@@ -64,6 +64,7 @@ services:
     image: frontend-catalog
     ports:
       - "3000:3000"
+      - "80:80"
     networks:
       - services
   
