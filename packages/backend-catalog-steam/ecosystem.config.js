@@ -9,9 +9,8 @@ module.exports = {
       },
       env_production: {
         NODE_ENV: 'production',
-        BASE_MESH: 'api',
-        RGB_MESH: 'rgb',
-        HEX_MESH: 'hex',
+        HOST: 'backend-catalog-steam',
+        BASES1: 'backend-base:39999', 
       },
     },
   ],
