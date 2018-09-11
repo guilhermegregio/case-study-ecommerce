@@ -3,10 +3,11 @@ const unionBy = require('lodash.unionby')
 const omit = require('lodash.omit')
 const pick = require('lodash.pick')
 const find = require('lodash.find')
+const stores = require('../config')
 
 const getCatalog = ({act}) =>
   async function(msg, done) {
-    const enablesStores = ['steam', 'xbox', 'psn']
+    const enablesStores = stores.getActive()
     const pickFields = ['sku', 'price']
 
     const actions = enablesStores.map(store => ({

@@ -1,8 +1,9 @@
 const client = require('../infrastructure/elasticsearch')
+const stores = require('../config')
 
 const createIndeces = ({act}) =>
   async function(msg, done) {
-    const enablesStores = ['steam', 'xbox', 'psn']
+    const enablesStores = stores.getActive()
 
     const filterStores = enablesStores.map(store => ({
       term: {'brands.stores': store},
@@ -16,7 +17,7 @@ const createIndeces = ({act}) =>
         body: {
           query: {
             bool: {
-              should: filterStores,
+              should: [{term: {'brands.stores': 'x'}}, ...filterStores],
             },
           },
         },

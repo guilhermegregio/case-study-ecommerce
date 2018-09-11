@@ -12,6 +12,14 @@ Para iniciar localmente todos os processos utilize o script abaixo
 node index.js
 ```
 
+### Adicionar mensagens na fila
+
+Para ativar/desativar lojas publicando mensagens na fila
+
+```
+curl -d '{"steam": true, "psn": false, "xbox": false}' http://localhost:4151/pub\?topic\=app_config_stores
+```
+
 ### Convenção de mensagens de commit
 
 <http://karma-runner.github.io/2.0/dev/git-commit-msg.html>
@@ -30,9 +38,9 @@ node index.js
 
 ### TODOS
 
-- [ ] Adicionar configurações de server que estão habilitados xbox, steam, psn
+- [x] Adicionar configurações de server que estão habilitados xbox, steam, psn
 - [x] Quebrar metodos getCatalog em mais partes: verifyIndices, createIndeces, getGsmes, updateIndices, etc
-- [ ] Adicionar integração com NSQ para alterar lojas habilitadas e refazer indices
+- [x] Adicionar integração com NSQ para alterar lojas habilitadas e refazer indices
 - [ ] Adicionar testes
 - [ ] Adicionar documentação, com screenshot, commit messages, etc
 
