@@ -6,6 +6,8 @@ services:
     ports:
       - "4160:4160"
       - "4161:4161"
+    networks:
+      - services
 
 
   nsqd:
@@ -18,6 +20,8 @@ services:
       - "4150:4150"
       - "4151:4151"
     command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --broadcast-address=127.0.0.1
+    networks:
+      - services
 
 
   nsqadmin:
@@ -27,6 +31,8 @@ services:
     ports:
       - "4171:4171"
     command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    networks:
+      - services
 
 
   elasticsearch:
@@ -42,6 +48,76 @@ services:
         hard: -1
     ports:
       - 9200:9200
+    networks:
+      - services
+
+
+  backend-base:
+    image: backend-base
+    networks:
+      - services
+
+
+  frontend-catalog:
+    depends_on:
+      - backend-catalog-api
+    image: frontend-catalog
+    networks:
+      - services
+  
+  
+  backend-catalog-api:
+    depends_on:
+      - backend-base
+      - backend-catalog
+    image: backend-catalog-api
+    ports:
+      - "3000:3000"
+    networks:
+      - services
+  
+  
+  backend-catalog:
+    depends_on:
+      - backend-base
+      - elasticsearch 
+      - nsqd
+    image: backend-catalog
+    networks:
+      - services
+  
+  
+  backend-catalog-favorite:
+    depends_on:
+      - backend-base
+    image: backend-catalog-favorite
+    networks:
+      - services
+  
+  
+  backend-catalog-psn:
+    depends_on:
+      - backend-base
+    image: backend-catalog-psn
+    networks:
+      - services
+  
+  
+  backend-catalog-xbox:
+    depends_on:
+      - backend-base
+    image: backend-catalog-xbox
+    networks:
+      - services
+
+
+  backend-catalog-steam:
+    depends_on:
+      - backend-base
+    image: backend-catalog-steam
+    networks:
+      - services
+
 
 networks:
   services:
