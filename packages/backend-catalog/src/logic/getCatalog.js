@@ -3,8 +3,9 @@ const unionBy = require('lodash.unionby')
 const omit = require('lodash.omit')
 const pick = require('lodash.pick')
 const find = require('lodash.find')
+const esClient = require('../infrastructure/elasticsearch')
 
-const getCatalog = ({act, esClient}) =>
+const getCatalog = ({act}) =>
   async function(msg, done) {
     const enablesStores = ['steam', 'xbox', 'psn']
 
