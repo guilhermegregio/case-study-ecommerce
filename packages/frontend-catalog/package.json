@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start": "API_URL=/api; next start",
     "docker": "npm run docker:package && npm run docker:build",
     "docker:build": "docker build -t $npm_package_name .",
     "docker:package": "npm pack"

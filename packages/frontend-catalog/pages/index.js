@@ -16,6 +16,8 @@ import {withStyles} from '@material-ui/core/styles'
 import CurrencyFormat from 'react-currency-format'
 import axios from 'axios'
 
+const API_URL = process.env.API_URL || 'http://localhost:3001'
+
 const styles = theme => ({
   appBar: {
     position: 'relative',
@@ -70,7 +72,7 @@ const styles = theme => ({
 
 class Album extends React.Component {
   static async getInitialProps({req}) {
-    const res = await axios.get('http://localhost:3001/catalog')
+    const res = await axios.get(`${API_URL}/catalog`)
     const games = res.data
 
     return {games}
