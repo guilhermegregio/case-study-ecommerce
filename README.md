@@ -43,6 +43,8 @@ curl -d '{"steam": true, "psn": false, "xbox": false}' http://localhost:4151/pub
 - [x] Adicionar integração com NSQ para alterar lojas habilitadas e refazer indices
 - [ ] Adicionar testes
 - [ ] Adicionar documentação, com screenshot, commit messages, etc
+- [ ] Configurar docker-compose para subir a aplicação inteira
+- [ ] Adicionar o lerna para facilitar builds de todos os projetos
 
 [arquitetura pdf]: ./resources/arquitetura.pdf
 [screenshot mobile]: ./resources/screenshot-mobile.png
