@@ -5,6 +5,15 @@
   "keywords": [],
   "author": "Guilherme M Gregio <guilherme@gregio.net> (http://gregio.net)",
   "license": "MIT",
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3001/proxy",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -16,10 +25,12 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
+    "axios": "^0.18.0",
     "jss": "latest",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
+    "react-currency-format": "^1.0.0",
     "react-dom": "latest",
     "react-jss": "latest"
   }
