@@ -26,6 +26,12 @@ Para iniciar o frontend localmente
 npm run start:frontend
 ```
 
+Para iniciar os serviços de slasticsearch e nsq
+
+```
+npm run compose:up
+```
+
 ### Gerar imagens
 
 Para rodar o build e gerar todas a imagens docker use:
