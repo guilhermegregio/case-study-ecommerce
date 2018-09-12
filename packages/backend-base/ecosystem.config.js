@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'backend-base',
       script: 'src/index.js',
-      instances: -1,
+      instances: 1,
       env: {
         NODE_ENV: 'development',
       },
