@@ -19,7 +19,7 @@ services:
     ports:
       - "4150:4150"
       - "4151:4151"
-    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --broadcast-address=nsqd
     networks:
       - services
 
@@ -63,8 +63,7 @@ services:
       - backend-catalog-api
     image: frontend-catalog
     ports:
-      - "3000:3000"
-      - "80:80"
+      - "3000:80"
     networks:
       - services
   
