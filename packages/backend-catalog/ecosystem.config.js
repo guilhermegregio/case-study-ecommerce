@@ -14,6 +14,7 @@ module.exports = {
         ELASTIC_HOST: 'elasticsearch',
         ELASTIC_PORT: '9200',
         LOOKUPD: 'nsqlookupd:4161',
+        NSQD_HOST: 'nsqd',
       },
     },
   ],

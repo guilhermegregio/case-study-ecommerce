@@ -19,7 +19,7 @@ services:
     ports:
       - "4150:4150"
       - "4151:4151"
-    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --broadcast-address=127.0.0.1
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 
     networks:
       - services
 

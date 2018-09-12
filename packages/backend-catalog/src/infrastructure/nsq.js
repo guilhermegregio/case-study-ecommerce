@@ -1,6 +1,7 @@
 const nsq = require('nsqjs')
 
 const LOOKUPD = process.env.LOOKUPD || '127.0.0.1:4161'
+const NSQD_HOST = process.env.NSQD_HOST || '127.0.0.1'
 
 function subscribe(options) {
   const defaultOptions = Object.assign(
@@ -35,7 +36,7 @@ function subscribe(options) {
 function publish(options) {
   const defaultOptions = Object.assign(
     {
-      host: '127.0.0.1',
+      host: NSQD_HOST,
       port: 4150,
       topic: 'sample_topic',
       message: '',
