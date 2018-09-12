@@ -11,7 +11,7 @@ module.exports = {
         NODE_ENV: 'production',
         PORT: '39999',
         HOST: 'backend-base',
-        BASES1: `backend-base:39999`,
+        BASES1: 'backend-base:39999',
       },
     },
   ],
