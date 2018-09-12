@@ -10,7 +10,9 @@
     "postinstall": "npm run bootstrap",
     "bootstrap": "lerna bootstrap",
     "build": "lerna exec --parallel -- npm run docker",
-    "start:frontend": "lerna exec --scope frontend-catalog -- npm run dev"
+    "start:frontend": "lerna exec --scope frontend-catalog -- npm run dev",
+    "compose:up": "cd docker-compose; docker-compose up",
+    "compose:down": "cd docker-compose; docker-compose down"
   },
   "devDependencies": {
     "kcd-scripts": "^0.44.0",

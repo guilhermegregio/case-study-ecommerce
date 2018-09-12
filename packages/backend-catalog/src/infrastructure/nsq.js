@@ -17,6 +17,7 @@ function subscribe(options) {
   const {topic, channel, lookupd, onMessage} = defaultOptions
 
   const reader = new nsq.Reader(topic, channel, {
+    nsqdTCPAddresses: `${NSQD_HOST}:4150`,
     lookupdHTTPAddresses: lookupd,
   })
 
