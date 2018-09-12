@@ -39,49 +39,6 @@ app.get('/catalog', function(req, res) {
   )
 })
 
-app.get('/rgb/:color', function(req, res) {
-  seneca.act(
-    {
-      role: 'color',
-      format: 'rgb',
-      color: req.params.color,
-    },
-    function(err, out) {
-      if (err) {
-        res.status(500).send(err.message)
-      }
-
-      res.send(out.color)
-    },
-  )
-})
-
-app.get('/wft/:color', function(req, res) {
-  const color = req.params.color
-  const actions = [
-    {
-      role: 'color',
-      format: 'rgb',
-      color,
-    },
-    {
-      role: 'color',
-      format: 'hex',
-      color,
-    },
-  ]
-
-  const commands = actions.map(action => act(action))
-
-  Promise.all(commands)
-    .then(results => {
-      res.send(results.map(r => r.color))
-    })
-    .catch(err => {
-      res.send(err)
-    })
-})
-
 app.listen(PORT, function() {
   console.log(`listening on http://localhost:${PORT}`)
 })
