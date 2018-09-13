@@ -10,7 +10,7 @@ module.exports = {
       env_production: {
         NODE_ENV: 'production',
         HOST: 'backend-catalog-api',
-        BASES1: 'backend-base:39999', 
+        BASES1: 'backend-base', 
       },
     },
   ],

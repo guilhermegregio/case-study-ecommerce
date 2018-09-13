@@ -6,13 +6,13 @@ const app = express()
 
 const PORT = process.env.PORT || 3001
 const HOST = process.env.HOST || '127.0.0.1'
-const BASES = process.env.BASES || '127.0.0.1:39999'
+const BASES1 = process.env.BASES1 || '127.0.0.1:39999'
 
 const seneca = Seneca({tag: 'api', log: 'silent'})
   // .test('print')
   .use('mesh', {
     host: HOST,
-    bases: [BASES],
+    bases: [BASES1],
   })
 
 const act = Promise.promisify(seneca.act, {context: seneca})

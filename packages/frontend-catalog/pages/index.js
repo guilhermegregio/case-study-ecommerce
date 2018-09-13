@@ -118,6 +118,16 @@ class Album extends React.Component {
           <div className={classNames(classes.layout, classes.cardGrid)}>
             {/* End hero unit */}
             <Grid container spacing={40}>
+              {games.length === 0 && (
+                <Typography
+                  variant="title"
+                  align="center"
+                  color="textSecondary"
+                  paragraph
+                >
+                  Ops! Infelismente não temos games no momento.
+                </Typography>
+              )}
               {games.map(game => (
                 <Grid item key={game.title} sm={6} md={4} lg={3}>
                   <Card className={classes.card}>

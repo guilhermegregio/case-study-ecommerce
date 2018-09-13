@@ -13,8 +13,6 @@ services:
   nsqd:
     depends_on:
       - nsqlookupd  
-    depends_on:
-      - nsqlookupd 
     image: nsqio/nsq 
     ports:
       - "4150:4150"
