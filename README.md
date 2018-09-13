@@ -2,6 +2,15 @@
 
 > Case Study: Implementação da arquitetura [arquitetura pdf], foi implementado o module catalog.
 
+## Informações
+
+Frontend esta com SSR então é possivel renderizar a pagina mesmo sem javascript habilitado, isso ajuda no SEO e na performance melhorando o FCP (first contentful paint)
+
+No backend os serviços se comunição por protocolo tcp e a aplicação backend-base faz a ponte entre eles bastando que cada serviço conheça somente o base e ao mandar mensagens ele se vira para mandar mensagens para os demais
+
+Ao solicitar os games na backend-catalog o mesmo verifica se existe dados no elasticsearch e caso não exista faz a soliticação para cada serviço no caso backend-steam, backend-xbox e backend-psn ao receber os dados faz o merge e ajusta a resposta salva no elasticsearch e devolve na resposta da api
+Para alterar as configurações de lojas o backend-catalog fica escutando a fila NSQ o topic app_config_stores
+
 ## Desenvolvimento
 
 ### Install
@@ -53,6 +62,12 @@ Para ativar/desativar lojas publicando mensagens na fila
 ```
 curl -d '{"steam": true, "psn": false, "xbox": false}' http://localhost:4151/pub\?topic\=app_config_stores
 ```
+
+### Admin do NSQ
+
+Acesso ao admin do NSQ
+
+<http://localhost:4171/>
 
 ### Convenção de mensagens de commit
 
